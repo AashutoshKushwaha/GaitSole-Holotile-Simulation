@@ -61,6 +61,7 @@ holotile_unity/[Rr]ecordings/
 
 # --- Large media & archives ---
 *.mp4
+!holotile_unity/results/*.mp4
 *.avi
 *.mov
 *.zip
