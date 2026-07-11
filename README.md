@@ -4,10 +4,13 @@
 
 Repository: [github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation](https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation)
 
----
 
-<video src="https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation/raw/main/holotile_unity/Results/result_v2.mp4" controls width="730">
-</video>
+
+https://github.com/user-attachments/assets/a4988888-34b5-47c0-b55b-9933f3edd362
+
+
+
+---
 
 ## Pipeline at a glance
 
