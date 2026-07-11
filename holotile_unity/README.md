@@ -7,6 +7,22 @@ Unity implementation of Disney's HoloTile omnidirectional floor patent
 
 ---
 
+## Results (`Results/`)
+
+Demo capture from **HumanWalkerDemo** (OpenSim walk replay + 4-region GRF on HoloTile floor):
+
+<video src="https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation/raw/main/holotile_unity/Results/result_v2.mp4" controls width="730">
+</video>
+
+![Human walker on HoloTile](Results/walking_unity.png)
+
+| File | Description |
+|------|-------------|
+| `Results/result_v2.mp4` | Unity demo recording (no audio, Git LFS) |
+| `Results/walking_unity.png` | Still frame for README / docs |
+
+---
+
 ## What you will see when it works
 
 ### Phase D (default) — kinematics only

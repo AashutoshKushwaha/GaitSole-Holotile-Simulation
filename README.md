@@ -5,7 +5,8 @@
 Repository: [github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation](https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation)
 
 ---
-<video src="https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation/raw/main/path/to/video.mp4" controls="controls" style="max-width: 730px;">
+
+<video src="https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation/raw/main/holotile_unity/Results/result_v2.mp4" controls width="730">
 </video>
 
 ## Pipeline at a glance
@@ -276,11 +277,9 @@ Eight independent plantar patches (heel / midfoot / forefoot / toe × left/right
 
 ### Unity — human walker on HoloTile (`holotile_unity/`)
 
-| Walker view | Additional frames |
-|-------------|-------------------|
-| ![Unity human walker](docs/assets/unity_human_walker_01.png) | ![Frame 2](docs/assets/unity__frame_02.png) ![Frame 3](docs/assets/unity__frame_03.png) |
+![Unity human walker](holotile_unity/Results/walking_unity.png)
 
-OpenSim `walk_motion.sto` + `walk_GRF.sto` drive a Mixamo character, 4-region GRF steers per-disc tile commands, pelvis stays centered. See [holotile_unity/README.md](holotile_unity/README.md) for setup.
+OpenSim `walk_motion.sto` + `walk_GRF.sto` drive a Mixamo character, 4-region GRF steers per-disc tile commands, pelvis stays centered. Demo video at top of this README and in [holotile_unity/README.md](holotile_unity/README.md).
 
 ---
 ## Publishing this repo
