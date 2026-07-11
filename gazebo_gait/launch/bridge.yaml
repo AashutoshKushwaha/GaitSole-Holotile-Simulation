@@ -1,0 +1,66 @@
+# ros_gz_bridge config for the walking world.
+#   camera + lidar : gz -> ROS  (sensing + recording for the Option-B vision swap)
+#   /human/cmd/*   : ROS -> gz  (gait player drives the JointPositionControllers)
+- ros_topic_name: "/camera/image"
+  gz_topic_name: "camera"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/camera/camera_info"
+  gz_topic_name: "camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/lidar/points"
+  gz_topic_name: "lidar/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/human/cmd/pelvis_ty"
+  gz_topic_name: "/human/cmd/pelvis_ty"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/hip_flexion_r"
+  gz_topic_name: "/human/cmd/hip_flexion_r"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/hip_adduction_r"
+  gz_topic_name: "/human/cmd/hip_adduction_r"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/knee_angle_r"
+  gz_topic_name: "/human/cmd/knee_angle_r"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/ankle_angle_r"
+  gz_topic_name: "/human/cmd/ankle_angle_r"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/hip_flexion_l"
+  gz_topic_name: "/human/cmd/hip_flexion_l"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/hip_adduction_l"
+  gz_topic_name: "/human/cmd/hip_adduction_l"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/knee_angle_l"
+  gz_topic_name: "/human/cmd/knee_angle_l"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/human/cmd/ankle_angle_l"
+  gz_topic_name: "/human/cmd/ankle_angle_l"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ

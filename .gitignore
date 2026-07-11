@@ -1,0 +1,76 @@
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vs/
+.idea/
+.vscode/
+.cursor/
+.claude/
+
+# --- Local workspace (recordings, datasets, scratch  never commit) ---
+local/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.pt
+.pytest_cache/
+.mypy_cache/
+
+# --- Conda / local installs ---
+E:/conda/
+**/conda/
+
+# --- OpenSim generated outputs (regenerate with scripts/) ---
+output/*
+!output/.gitkeep
+
+# --- MuJoCo generated frames ---
+holotile_sim/output/
+
+# --- Gazebo runtime outputs (screenshots in docs/assets/) ---
+gazebo_gait/output/
+
+# --- Predictor training data & run artifacts (download/regenerate locally) ---
+motion_predictor/data/
+motion_predictor/runs/
+
+# --- Unity scratch / recovery scenes ---
+holotile_unity/Assets/_Recovery/
+holotile_unity/Assets/_Recovery.meta
+
+# --- Optional duplicate character mesh (import Mixamo Walking.fbx instead) ---
+holotile_unity/Assets/HoloTile/Characters/character.fbx
+holotile_unity/Assets/HoloTile/Characters/character.fbx.meta
+
+# --- Unity generated ---
+holotile_unity/[Ll]ibrary/
+holotile_unity/[Tt]emp/
+holotile_unity/[Oo]bj/
+holotile_unity/[Bb]uild/
+holotile_unity/[Bb]uilds/
+holotile_unity/[Ll]ogs/
+holotile_unity/[Uu]ser[Ss]ettings/
+holotile_unity/[Mm]emoryCaptures/
+holotile_unity/[Rr]ecordings/
+
+# --- Large media & archives ---
+*.mp4
+*.avi
+*.mov
+*.zip
+*.7z
+
+# --- OpenSim install bundle ---
+4.5/
+
+# --- Logs & secrets ---
+*.log
+.env
+*.pem
+credentials.json

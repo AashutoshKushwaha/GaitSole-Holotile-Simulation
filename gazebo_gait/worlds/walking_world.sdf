@@ -1,0 +1,261 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="walking">
+    <physics name="100hz" type="ignored"><max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor></physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows><pose>0 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.3 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="c"><geometry><plane><normal>0 0 1</normal><size>50 50</size></plane></geometry></collision>
+        <visual name="v"><geometry><plane><normal>0 0 1</normal><size>50 50</size></plane></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="human">
+      <pose>0 0 0 0 0 0</pose>
+      <link name="pelvis">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>3.0</mass><inertia><ixx>0.01352</ixx><iyy>0.01352</iyy><izz>0.01084</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="torso_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/torso.obj</uri></mesh></geometry>
+        </visual>
+        
+        <visual name="skin_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/skin.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="torso_c"><pose>0 0 0.26010000000000005 0 0 0</pose>
+          <geometry><cylinder><radius>0.085</radius><length>0.5202000000000001</length></cylinder></geometry>
+        </collision>
+      </link>
+      <joint name="anchor" type="prismatic"><parent>world</parent><child>pelvis</child>
+        <axis><xyz>0 0 1</xyz>
+          <limit><lower>0</lower><upper>1.5</upper><effort>8000</effort></limit>
+          <dynamics><damping>5</damping></dynamics></axis>
+      </joint>
+      
+      <joint name="hip_flexion_r" type="revolute">
+        <pose relative_to="pelvis">0 -0.0900 0 0 0 0</pose>
+        <parent>pelvis</parent>
+        <child>hipflex_r</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="hipflex_r">
+        <pose relative_to="hip_flexion_r">0 0 0 0 0 0</pose>
+        <inertial><mass>0.05</mass><inertia><ixx>1e-4</ixx><iyy>1e-4</iyy><izz>1e-4</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+      </link>
+      <joint name="hip_adduction_r" type="revolute">
+        <pose relative_to="hip_flexion_r">0 0 0 0 0 0</pose>
+        <parent>hipflex_r</parent>
+        <child>thigh_r</child>
+        <axis><xyz>1 0 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="thigh_r">
+        <pose relative_to="hip_adduction_r">0 0 0 0 0 0</pose>
+        <inertial><mass>1.5</mass><inertia><ixx>0.02303</ixx><iyy>0.02303</iyy><izz>0.00270</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="thigh_r_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/thigh_r.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="thigh_r_c">
+          <pose>0 0 -0.2082 0 0 0</pose>
+          <geometry><cylinder><radius>0.06</radius><length>0.4165</length></cylinder></geometry>
+        </collision>
+      </link>
+      <joint name="knee_angle_r" type="revolute">
+        <pose relative_to="thigh_r">0 0 -0.4165 0 0 0</pose>
+        <parent>thigh_r</parent>
+        <child>shank_r</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="shank_r">
+        <pose relative_to="knee_angle_r">0 0 0 0 0 0</pose>
+        <inertial><mass>0.8</mass><inertia><ixx>0.01216</ixx><iyy>0.01216</iyy><izz>0.00100</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="shank_r_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/shank_r.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="shank_r_c">
+          <pose>0 0 -0.2091 0 0 0</pose>
+          <geometry><cylinder><radius>0.05</radius><length>0.4182</length></cylinder></geometry>
+        </collision>
+      </link>
+      <joint name="ankle_angle_r" type="revolute">
+        <pose relative_to="shank_r">0 0 -0.4182 0 0 0</pose>
+        <parent>shank_r</parent>
+        <child>foot_r</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="foot_r">
+        <pose relative_to="ankle_angle_r">0 0 0 0 0 0</pose>
+        <inertial><mass>0.3</mass><inertia><ixx>0.00182</ixx><iyy>0.00182</iyy><izz>0.00030</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="foot_r_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/foot_r.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="foot_r_c">
+          <pose>0.1292 0 0 0 1.5708 0</pose>
+          <geometry><cylinder><radius>0.045</radius><length>0.2584</length></cylinder></geometry>
+        </collision>
+      </link>
+      <joint name="hip_flexion_l" type="revolute">
+        <pose relative_to="pelvis">0 0.0900 0 0 0 0</pose>
+        <parent>pelvis</parent>
+        <child>hipflex_l</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="hipflex_l">
+        <pose relative_to="hip_flexion_l">0 0 0 0 0 0</pose>
+        <inertial><mass>0.05</mass><inertia><ixx>1e-4</ixx><iyy>1e-4</iyy><izz>1e-4</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+      </link>
+      <joint name="hip_adduction_l" type="revolute">
+        <pose relative_to="hip_flexion_l">0 0 0 0 0 0</pose>
+        <parent>hipflex_l</parent>
+        <child>thigh_l</child>
+        <axis><xyz>1 0 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="thigh_l">
+        <pose relative_to="hip_adduction_l">0 0 0 0 0 0</pose>
+        <inertial><mass>1.5</mass><inertia><ixx>0.02303</ixx><iyy>0.02303</iyy><izz>0.00270</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="thigh_l_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/thigh_l.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="thigh_l_c">
+          <pose>0 0 -0.2082 0 0 0</pose>
+          <geometry><cylinder><radius>0.06</radius><length>0.4165</length></cylinder></geometry>
+        </collision>
+      </link>
+      <joint name="knee_angle_l" type="revolute">
+        <pose relative_to="thigh_l">0 0 -0.4165 0 0 0</pose>
+        <parent>thigh_l</parent>
+        <child>shank_l</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="shank_l">
+        <pose relative_to="knee_angle_l">0 0 0 0 0 0</pose>
+        <inertial><mass>0.8</mass><inertia><ixx>0.01216</ixx><iyy>0.01216</iyy><izz>0.00100</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="shank_l_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/shank_l.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="shank_l_c">
+          <pose>0 0 -0.2091 0 0 0</pose>
+          <geometry><cylinder><radius>0.05</radius><length>0.4182</length></cylinder></geometry>
+        </collision>
+      </link>
+      <joint name="ankle_angle_l" type="revolute">
+        <pose relative_to="shank_l">0 0 -0.4182 0 0 0</pose>
+        <parent>shank_l</parent>
+        <child>foot_l</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper><effort>500</effort></limit><dynamics><damping>0.5</damping></dynamics></axis>
+      </joint>
+      <link name="foot_l">
+        <pose relative_to="ankle_angle_l">0 0 0 0 0 0</pose>
+        <inertial><mass>0.3</mass><inertia><ixx>0.00182</ixx><iyy>0.00182</iyy><izz>0.00030</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        
+        <visual name="foot_l_v">
+          <geometry><mesh><uri>file:///mnt/e/OpenSim/gazebo_gait/meshes/foot_l.obj</uri></mesh></geometry>
+        </visual>
+        <collision name="foot_l_c">
+          <pose>0.1292 0 0 0 1.5708 0</pose>
+          <geometry><cylinder><radius>0.045</radius><length>0.2584</length></cylinder></geometry>
+        </collision>
+      </link>
+      <plugin filename="gz-sim-joint-state-publisher-system"
+              name="gz::sim::systems::JointStatePublisher"/>
+
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>hip_flexion_r</joint_name>
+      <topic>/human/cmd/hip_flexion_r</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>hip_adduction_r</joint_name>
+      <topic>/human/cmd/hip_adduction_r</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>knee_angle_r</joint_name>
+      <topic>/human/cmd/knee_angle_r</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>ankle_angle_r</joint_name>
+      <topic>/human/cmd/ankle_angle_r</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>hip_flexion_l</joint_name>
+      <topic>/human/cmd/hip_flexion_l</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>hip_adduction_l</joint_name>
+      <topic>/human/cmd/hip_adduction_l</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>knee_angle_l</joint_name>
+      <topic>/human/cmd/knee_angle_l</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+            name="gz::sim::systems::JointPositionController">
+      <joint_name>ankle_angle_l</joint_name>
+      <topic>/human/cmd/ankle_angle_l</topic>
+      <p_gain>600.0</p_gain><i_gain>20.0</i_gain><d_gain>8.0</d_gain>
+    </plugin>
+      <plugin filename="gz-sim-joint-position-controller-system"
+              name="gz::sim::systems::JointPositionController">
+        <joint_name>anchor</joint_name><topic>/human/cmd/pelvis_ty</topic>
+        <p_gain>12000.0</p_gain><i_gain>0.0</i_gain><d_gain>150.0</d_gain>
+      </plugin>
+    </model>
+
+    <model name="sensor_rig">
+      <static>true</static>
+      <pose>0 -3.2 0.95 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="v"><geometry><box><size>0.12 0.12 0.12</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material></visual>
+        <sensor name="camera" type="camera">
+          <camera><horizontal_fov>1.20</horizontal_fov>
+            <image><width>640</width><height>480</height></image>
+            <clip><near>0.1</near><far>50</far></clip></camera>
+          <always_on>1</always_on><update_rate>30</update_rate><topic>camera</topic>
+        </sensor>
+        <sensor name="lidar" type="gpu_lidar">
+          <lidar><scan>
+            <horizontal><samples>320</samples><resolution>1</resolution><min_angle>-0.7</min_angle><max_angle>0.7</max_angle></horizontal>
+            <vertical><samples>32</samples><resolution>1</resolution><min_angle>-0.45</min_angle><max_angle>0.45</max_angle></vertical>
+          </scan><range><min>0.2</min><max>40</max><resolution>0.005</resolution></range></lidar>
+          <always_on>1</always_on><update_rate>20</update_rate><topic>lidar</topic>
+        </sensor>
+      </link>
+    </model>
+  </world>
+</sdf>
