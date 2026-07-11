@@ -4,41 +4,9 @@
 
 Repository: [github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation](https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation)
 
-This project supports **GaitSole** (per-region plantar GRF simulation + PyTorch motion predictor) and **HoloTile** (Disney patent US20180217662A1–style active floor for VR rehabilitation, bot training, and gait-aware locomotion research).
-
 ---
-
-## Results gallery
-
-### OpenSim — per-region foot loading
-
-![Per-region GRF (right foot)](docs/assets/opensim_per_region_grf.png)
-
-Eight independent plantar patches (heel / midfoot / forefoot / toe × left/right) replace a single whole-foot contact model.
-
-### MuJoCo — HoloTile control research (`holotile_sim/`)
-
-| Walk demo | Control frame | Fusion sweep |
-|-----------|---------------|--------------|
-| ![MuJoCo walk](docs/assets/holotile_walk_frame.png) | ![Control](docs/assets/holotile_control_frame.png) | ![Fusion](docs/assets/holotile_fusion_sweep.png) |
-
-![Control trajectory](docs/assets/holotile_control_trajectory.png)
-
-### Gazebo — predictor + perception loop (`gazebo_gait/`)
-
-| Verification curves | Perception overlay | Reference pose |
-|---------------------|-------------------|----------------|
-| ![Verify](docs/assets/gazebo_verify_curves.png) | ![Overlay](docs/assets/gazebo_overlay.png) | ![Reference](docs/assets/gazebo_reference.png) |
-
-### Unity — human walker on HoloTile (`holotile_unity/`)
-
-| Walker view | Additional frames |
-|-------------|-------------------|
-| ![Unity human walker](docs/assets/unity_human_walker_01.png) | ![Frame 2](docs/assets/unity__frame_02.png) ![Frame 3](docs/assets/unity__frame_03.png) |
-
-OpenSim `walk_motion.sto` + `walk_GRF.sto` drive a Mixamo character, 4-region GRF steers per-disc tile commands, pelvis stays centered. See [holotile_unity/README.md](holotile_unity/README.md) for setup.
-
----
+<video src="https://github.com/AashutoshKushwaha/GaitSole-Holotile-Simulation/raw/main/path/to/video.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 ## Pipeline at a glance
 
@@ -284,10 +252,40 @@ Unity `DiskKinematics.cs` and `floor_controller.py` are kept in parity.
 - Live mocap / IMU / vision feeding `infer_stream.py` and Gazebo perception
 
 ---
+## Results gallery
 
+### OpenSim — per-region foot loading
+
+![Per-region GRF (right foot)](docs/assets/opensim_per_region_grf.png)
+
+Eight independent plantar patches (heel / midfoot / forefoot / toe × left/right) replace a single whole-foot contact model.
+
+### MuJoCo — HoloTile control research (`holotile_sim/`)
+
+| Walk demo | Control frame | Fusion sweep |
+|-----------|---------------|--------------|
+| ![MuJoCo walk](docs/assets/holotile_walk_frame.png) | ![Control](docs/assets/holotile_control_frame.png) | ![Fusion](docs/assets/holotile_fusion_sweep.png) |
+
+![Control trajectory](docs/assets/holotile_control_trajectory.png)
+
+### Gazebo — predictor + perception loop (`gazebo_gait/`)
+
+| Verification curves | Perception overlay | Reference pose |
+|---------------------|-------------------|----------------|
+| ![Verify](docs/assets/gazebo_verify_curves.png) | ![Overlay](docs/assets/gazebo_overlay.png) | ![Reference](docs/assets/gazebo_reference.png) |
+
+### Unity — human walker on HoloTile (`holotile_unity/`)
+
+| Walker view | Additional frames |
+|-------------|-------------------|
+| ![Unity human walker](docs/assets/unity_human_walker_01.png) | ![Frame 2](docs/assets/unity__frame_02.png) ![Frame 3](docs/assets/unity__frame_03.png) |
+
+OpenSim `walk_motion.sto` + `walk_GRF.sto` drive a Mixamo character, 4-region GRF steers per-disc tile commands, pelvis stays centered. See [holotile_unity/README.md](holotile_unity/README.md) for setup.
+
+---
 ## Publishing this repo
 
-**Commits and pushes are done by the repository owner only** — not by AI assistants. See **[docs/PUBLISHING.md](docs/PUBLISHING.md)** for init, `.gitignore`, commit commands, and how to keep AI tools off the GitHub contributor graph.
+**Commits and pushes are done by the repository owner only**. See **[docs/PUBLISHING.md](docs/PUBLISHING.md)** for init, `.gitignore`, commit commands.
 
 ---
 
